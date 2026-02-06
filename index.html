@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khusus untuk Lampang</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            transform: rotate(45deg);
+            animation: fall 3s linear infinite;
+        }
+        .heart:before, .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+        }
+        .heart:before { top: -10px; left: 0; }
+        .heart:after { top: 0; left: 10px; }
+        @keyframes fall {
+            0% { top: -10px; opacity: 1; }
+            100% { top: 100vh; opacity: 0; }
+        }
+        button {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 10px;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ff3742;
+        }
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+        #popup button { margin: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hai baby, Ini Efraim Buatkan Khusus Untuk Baby!</h1>
+        <p>Baby adalah Rumah dalam hidupku. Aku ingin bertanya sesuatu yang spesial...</p>
+        <button onclick="showQuestion(1)">Pertanyaan 1</button>
+        <button onclick="showQuestion(2)">Pertanyaan 2</button>
+        <button onclick="showQuestion(3)">Pertanyaan 3</button>
+    </div>
+
+    <!-- Animasi hati jatuh -->
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+
+    <!-- Pop-up untuk pertanyaan -->
+    <div id="popup">
+        <p id="questionText"></p>
+        <button onclick="answer('yes')">Ya</button>
+        <button onclick="answer('no')">Tidak</button>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        const questions = [
+            "Boleh enggak Efraim menganggap hari ini sebagai hari special?",
+            "Kalau Jalan Tidak Selalu Mudah, Boleh Efraim Tetap menjaga Perasaanmu?",
+            "Tidak Berjanji Lebih, Boleh kah Efraim Terus ada untuk Lampang?"
+        ];
+        const yesAnswers = [
+            "Efraim Senang dan Efraim Sayang sama Lampang. 💖",
+            "Efraim Bahagia dan Efraim Akan Tetap menjagamu dengan sungguh-sungguh. 🌹",
+            "Efraim akan Memilih Untuk Ada dan Menyayangimu. 🍽️❤️"
+        ];
+        const noAnswers = [
+            "Tidak apa-apa, Rasa Sayangku ke Lampang tetap sama. 😊",
+            "Efraim Tetap Menghargai, dan Kasih Sayangku ke Lampang Tidak berubah! 🌟",
+            "Efraim tetap memilih Menyayangimu, dengan cara efraim sendiri . 🍲😘"
+        ];
+
+        function showQuestion(num) {
+            currentQuestion = num - 1;
+            document.getElementById('questionText').innerText = questions[currentQuestion];
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function answer(type) {
+            document.getElementById('popup').style.display = 'none';
+            if (type === 'yes') {
+                alert(yesAnswers[currentQuestion]);
+            } else {
+                alert(noAnswers[currentQuestion]);
+            }
+        }
+    </script>
+
+    <!-- Musik latar -->
+<audio autoplay loop>
+    <source src="assets.mp3" type="audio/mpeg">
+</audio>
+</body>
+</html>
